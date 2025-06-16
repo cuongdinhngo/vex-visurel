@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar app>
+  <v-app-bar app elevation="0" class="border-b-sm">
     <!-- LEFT MENU ACTIONS-->
     <div
       v-if="!mdAndDown"
@@ -48,7 +48,7 @@
       <!-- Locale -->
       <ItemsHeaderLocale />
     </div>
-    </v-app-bar>
+  </v-app-bar>
 </template>
 <script setup lang="ts">
 import { ItemsHeaderNotifications } from '#components';

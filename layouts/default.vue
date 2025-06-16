@@ -16,7 +16,7 @@
     />
 
     <v-main>
-      <v-container>
+      <v-container class="py-2 px-2" fluid>
         <slot />
       </v-container>
     </v-main>
