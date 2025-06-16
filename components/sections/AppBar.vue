@@ -37,7 +37,13 @@
       <ItemsHeaderNotifications />
 
       <!-- Events -->
-      <ItemsHeaderEvent />
+      <v-btn
+        icon
+        color="primary"
+        @click="eventDrawer = !eventDrawer"
+      >
+        <v-icon>mdi-book-multiple</v-icon>
+      </v-btn>
 
       <!-- Locale -->
       <ItemsHeaderLocale />
@@ -51,6 +57,11 @@ const { mdAndDown } = useDisplay();
 
 const drawer = defineModel('drawer', {
   default: true,
+  type: Boolean,
+});
+
+const eventDrawer = defineModel('eventDrawer', {
+  default: false,
   type: Boolean,
 });
 </script>
