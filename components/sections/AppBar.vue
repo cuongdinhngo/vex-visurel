@@ -37,9 +37,7 @@
       <ItemsHeaderNotifications />
 
       <!-- Events -->
-      <v-btn icon color="primary">
-        <v-icon>mdi-book-multiple</v-icon>
-      </v-btn>
+      <ItemsHeaderEvent />
 
       <!-- Locale -->
       <ItemsHeaderLocale />
