@@ -34,24 +34,7 @@
       <ItemsHeaderSearch />
 
       <!-- Notifications -->
-      <v-menu>
-        <template v-slot:activator="{ props }">
-          <v-btn
-            icon
-            color="primary"
-          >
-            <v-icon>mdi-bell-ring</v-icon>
-          </v-btn>
-        </template>
-        <v-list>
-          <v-list-item to="/">
-            <v-list-item-title>Home</v-list-item-title>
-          </v-list-item>
-          <v-list-item to="/about">
-            <v-list-item-title>About</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
+      <ItemsHeaderNotifications />
 
       <!-- Events -->
       <v-btn icon color="primary">
@@ -64,6 +47,8 @@
     </v-app-bar>
 </template>
 <script setup lang="ts">
+import { ItemsHeaderNotifications } from '#components';
+
 const { mdAndDown } = useDisplay();
 
 const drawer = defineModel('drawer', {
