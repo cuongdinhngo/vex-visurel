@@ -10,7 +10,7 @@
       tile
       class="bg-primary"
       subtitle="Today"
-      :title="useDateFormat(new Date(), 'dddd MMM DD, YYYY')"
+      :title="useDateFormat(new Date(), 'dddd MMM DD, YYYY').value"
     >
       <v-card-text class="bg-background pa-0">
         <v-list slim density="compact">

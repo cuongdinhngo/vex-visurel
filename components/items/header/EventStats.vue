@@ -1,7 +1,7 @@
 <template>
-  <v-list-subtitle>
-    <h6 class="text-uppercase text-h6 pl-4 mt-4">{{ eventLabel }}</h6>
-  </v-list-subtitle>
+  <v-list-subheader>
+    <h6 class="text-uppercase text-h6 mt-4 text-black">{{ eventLabel }}</h6>
+  </v-list-subheader>
 
   <v-list-item
     v-for="event in eventList"
