@@ -14,7 +14,7 @@ export default defineVuetifyConfiguration({
           info: '#2196F3',
           success: '#4CAF50',
           warning: '#FFC107',
-          background: '#EEF5F9', // CUSTOM light background
+          background: '#F3F4F6',
           surface: '#FFFFFF',
           'on-background': '#000000',
           'on-surface': '#3e3d3d',
@@ -30,10 +30,10 @@ export default defineVuetifyConfiguration({
           info: '#6200EE',
           success: '#03DAC5',
           warning: '#FF9800',
-          background: '#1F2937', // Dark background
-          surface: '#FFFFFF',
-          'on-background': '#000000',
-          'on-surface': '#3e3d3d',
+          background: '#1F2937',
+          surface: '#374151',
+          'on-background': '#FFFFFF',
+          'on-surface': '#F9FAFB',
         }
       }
     }
