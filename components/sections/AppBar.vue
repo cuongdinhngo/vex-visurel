@@ -31,12 +31,7 @@
     <!-- RIGHT MENU ACTIONS -->
     <div class="right d-flex align-center ga-2">
       <!-- Search -->
-      <v-btn
-        icon
-        color="primary"
-      >
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
+      <ItemsHeaderSearch />
 
       <!-- Notifications -->
       <v-menu>
