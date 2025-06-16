@@ -9,7 +9,9 @@
 
   <v-dialog
     activator="#header-search-dialog"
-    max-width="700"
+    max-width="800"
+    scrollable
+    transition="dialog-top-transition"
   >
     <template v-slot:default="{ isActive }">
       <v-sheet>
