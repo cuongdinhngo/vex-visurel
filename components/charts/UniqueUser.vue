@@ -5,7 +5,7 @@
     :tag="{ icon: 'mdi-account', color: 'orange' }"
     :breakpoints="{ sm: 12, md: 3, lg: 3 }"
     :chart-id="'unique-users-chart'"
-    :chart-height="{ mobile: '100px', desktop: '100px' }"
+    :chart-height="{ mobile: '115px', desktop: '115px' }"
     :chart-data="uniqueUsers"
   />
 </template>

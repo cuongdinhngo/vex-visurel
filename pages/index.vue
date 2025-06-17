@@ -13,19 +13,13 @@
   </v-row>
 
   <v-row class="pa-4">
-    <v-col cols="12" md="6">
-      <v-card class="pa-4">
-        <v-card-title class="text-caption font-weight-bold">Dashboards</v-card-title>
-        <v-card-text>
-          <p class="text-subtitle-1">
-            A dashboard is a visual representation of key metrics and data points, providing an at-a-glance view of performance and trends.
-          </p>
-        </v-card-text>
-      </v-card>
-    </v-col>
-    
+    <!-- Highlight Card-->
+    <ChartsCardHighlight />
+
+    <!-- Page views Card-->
     <ChartsPageView />
 
+    <!-- Unique users Card -->
     <ChartsUniqueUser />
   </v-row>
 </template>
