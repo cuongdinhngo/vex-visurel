@@ -68,55 +68,14 @@
       :breakpoints="{ sm: 12, md: 3, lg: 3 }"
     />
   </v-row>
+
+  <v-row class="px-4">
+    <!-- User & Session Anaylytics-->
+    <ChartsUserSessionAnalytics />
+
+    <ChartsSaleTable />
+  </v-row>
 </template>
 <script setup lang="ts">
-import type { Tag } from '~/types/tag';
-
-const { mobile} = useDisplay();
-
-const props = defineProps({
-  tag: {
-    type: Object as () => Tag
-  },
-  isEnabled: {
-    type: Boolean,
-    default: false
-  },
-  totalCount: {
-    type: Number
-  },
-  label: {
-    type: String,
-    default: 'Users'
-  },
-  stats: {
-    type: Object as () => Record<string, any>,
-    default: () => ({})
-  },
-  breakpoints: {
-    type: Object as () => Record<string, number>,
-    default: () => ({ sm: 12, md: 3, lg: 3 })
-  }
-});
+const { mobile } = useDisplay();
 </script>
-<style scoped>
-.card-data {
-  position: relative;
-}
-.btn-share {
-  position: absolute;
-  z-index: 9999;
-  top: -5px;
-  right: -5px;
-  transition: opacity 0.3s ease;
-}
-.card-content {
-  position: relative;
-}
-.hint-info {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  transition: opacity 0.3s ease;
-}
-</style>
