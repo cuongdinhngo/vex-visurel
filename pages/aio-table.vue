@@ -56,7 +56,10 @@
             class="d-flex"
           >
             <div class="page-info d-flex align-center ga-3">
-              <h5 class="text-h6 border-e-sm pr-3">{{ selectedCount }}</h5>
+              <h5
+                v-if="!mobile"
+                class="text-h6 border-e-sm pr-3"
+              >{{ selectedCount }}</h5>
               <div
                 v-if="selected.length"
                 class="border-e-sm pr-3"
@@ -78,20 +81,22 @@
                 prepend-inner-icon="mdi-magnify"
                 hide-details
                 single-line
-                width="300"
+                :width="selected.length && mobile ? '50px' : '200px'"
                 density="compact"
                 color="primary"
               />
             </div>
             <v-spacer></v-spacer>
-            <div class="page-actions pr-3 d-flex align-center ga-5">
+            <div class="page-actions pr-3 d-flex align-center ga-1">
               <v-btn
                 variant="text"
                 icon="mdi-filter-variant"
+                size="40"
               />
               <v-btn
                 icon="mdi-plus"
                 color="primary"
+                size="40"
               />
             </div>
           </v-col>
@@ -113,6 +118,8 @@
           <template v-slot:item.name="{ item }">
             <v-list-item
               :key="item.id"
+              density="comfortable"
+              class="pa-0"
             >
               <template v-slot:prepend>
                 <v-avatar
