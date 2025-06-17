@@ -16,13 +16,11 @@
     />
 
     <v-main>
-      <v-container class="py-2 px-2" fluid>
-        <slot />
-      </v-container>
+      <slot />
     </v-main>
 
     <v-footer app>
-      <span class="text-center">© 2023 My Application</span>
+      <span class="text-center">© 2025 My Application</span>
     </v-footer>
   </v-app>
 </template>

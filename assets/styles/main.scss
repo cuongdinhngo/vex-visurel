@@ -14,7 +14,9 @@ html, body {
 .v-application {
   font-family: var(--font-family-base) !important;
   
-  .text-h1, .text-h2, .text-h3, .text-h4, .text-h5, .text-h6 {
+  .text-h1, .text-h2, .text-h3, .text-h4, .text-h5, .text-h6, 
+  .text-subtitle-1, .text-subtitle-2, .text-body-1, .text-body-2,
+  .text-caption, .text-overline {
     font-family: var(--font-family-base) !important;
   }
 }
