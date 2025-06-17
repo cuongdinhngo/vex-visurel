@@ -1,35 +1,33 @@
 <template>
   <v-breadcrumbs
     :items="items"
-    style="text-decoration: none;"
+    density="compact"
+    class="pa-0"
   >
     <template v-slot:divider>
       <v-icon icon="mdi-square-small"></v-icon>
     </template>
     <template v-slot:title="{ item }">
-      {{ item.title }}
+      <v-icon
+        v-if="item.icon"
+        :icon="item.icon"
+      />
+      <span v-else>{{ item.title }}</span>
     </template>
   </v-breadcrumbs>
 </template>
 <script setup lang="ts">
-const items = [
-  {
-    title: 'Home',
-    disable: false,
-    icon: 'mdi-home',
-    to: { name: 'index'}
-  },
-  {
-    title: 'Dashboards',
-    disable: true,
-    icon: 'mdi-view-dashboard',
-    to: { name: 'index'}
-  },
-  {
-    title: 'Analytics',
-    disable: true,
-    icon: 'mdi-cog',
-    to: { name: 'index'}
-  }
-];
+defineProps<{
+  items?: Array<{
+    title: string;
+    disable?: boolean;
+    icon?: string;
+    to?: { name: string };
+  }>;
+}>();
 </script>
+<style scoped>
+.v-breadcrumbs-item--link {
+  text-decoration: none !important;
+}
+</style>
