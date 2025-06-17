@@ -4,6 +4,7 @@ export const NAV_MENU = [
     menu: [
       {
         label: "Analytics",
+        page: "index",
         icon: "mdi-chart-line",
         to: { name: "index" },
       },
@@ -14,8 +15,9 @@ export const NAV_MENU = [
     menu: [
       {
         label: "All-In-One Table",
+        page: "aio-table",
         icon: "mdi-table-large",
-        to: { name: "index" },
+        to: { name: "aio-table" },
       },
       {
         label: "Help Center",

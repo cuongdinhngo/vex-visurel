@@ -6,6 +6,7 @@
     nav
     color="#1F2937"
     :rail="rail"
+    id="main-nav-drawer"
   >
     <v-card
       elevation="0"
@@ -59,15 +60,21 @@
       </v-list-subheader>
       <template
         v-for="item in group.menu"
-        :key="item.label"
+        :key="`${item.icon}-${item.label}`"
       >
+        <!-- Main Item without sub-menu -->
         <v-list-item
           v-if="!item.subMenu"
+          :key="`${item.icon}-${item.label}`"
           :title="item.label"
           :prepend-icon="item.icon"
           link
+          :to="item.to"
+          :active="route.name === item.page"
         >
         </v-list-item>
+
+        <!-- Sub menu -->
         <v-list-group
           v-else
           :value="item.label"
@@ -78,6 +85,7 @@
               v-bind="props"
               :title="item.label"
               :prepend-icon="item.icon"
+              :key="`${item.icon}-${item.label}`"
             ></v-list-item>
           </template>
           <!-- Sub Items -->
@@ -99,6 +107,7 @@ const drawer = defineModel('drawer', {
 
 import { NAV_MENU } from '~/config/nav-menu';
 
+const route = useRoute();
 const rail = ref(false);
 
 const logoNav = computed(() => `${useRuntimeConfig().app.baseURL}/logo.svg`);
