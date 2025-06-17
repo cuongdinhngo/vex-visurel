@@ -1,5 +1,5 @@
 <template>
-  <ChartsCardChart
+  <ChartsSmallChart
     :total-count="3400"
     label="Unique Users"
     :tag="{ icon: 'mdi-account', color: 'orange' }"
@@ -10,6 +10,8 @@
   />
 </template>
 <script setup lang="ts">
+import { ChartsSmallChart } from '#components';
+
 const { monthlySales:monthlyUniqueUser } = useStatistics();
 const { data:uniqueUsers, error } = await useAsyncData(
   'unique-users',

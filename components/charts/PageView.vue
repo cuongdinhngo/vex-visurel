@@ -1,5 +1,5 @@
 <template>
-  <ChartsCardChart
+  <ChartsSmallChart
     :total-count="92300"
     label="Page Views"
     :tag="{ icon: 'mdi-chart-bar-stacked', color: 'primary' }"
@@ -10,6 +10,8 @@
   />
 </template>
 <script setup lang="ts">
+import { ChartsSmallChart } from '#components';
+
 const { monthlySales:monthlyPageViews } = useStatistics();
 const { data:pageViews, error } = await useAsyncData(
   'page-views',
