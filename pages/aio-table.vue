@@ -151,6 +151,7 @@
               class="ma-1"
               color="primary"
               text-color="white"
+              size="small"
             >
               {{ skill }}
             </v-chip>
