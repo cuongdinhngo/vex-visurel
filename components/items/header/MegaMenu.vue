@@ -14,7 +14,7 @@
         Mega Menu
       </v-btn>
     </template>
-    <v-card>
+    <v-card max-width="1200px" max-height="500px" class="overflow-hidden">
       <v-container class="pa-0">
         <v-row>
           <!-- Mega menu description-->
