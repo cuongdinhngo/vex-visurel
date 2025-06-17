@@ -163,13 +163,16 @@
             >
             </v-btn>
             <v-menu activator="parent">
+              <v-list>
                 <v-list-item
-                  v-for="item in actions"
-                  :key="item.icon"
+                  v-for="(item, index) in actions"
+                  :key="index"
+                  :value="index"
                   :prepend-icon="item.icon"
                 >
                   <v-list-item-title>{{ item.title }}</v-list-item-title>
                 </v-list-item>
+              </v-list>
             </v-menu>
           </template>
         </v-data-table>
