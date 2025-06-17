@@ -24,32 +24,14 @@
       </v-card>
     </v-col>
     
-    <ItemsStatsCardChart />
+    <ChartsPageView />
 
-    <v-col cols="12" md="3">
-      <v-card
-        class="pa-4"
-        title="67.4k"
-        subtitle="Unque Visitors"
-      >
-        <template #append>
-          <v-btn
-            icon="mdi-account-multiple"
-            variant="tonal"
-            color="orange"
-          />
-        </template>
-        <v-card-text>
-          <p class="text-subtitle-1">
-            A dashboard is a visual representation of key metrics and data points, providing an at-a-glance view of performance and trends.
-          </p>
-        </v-card-text>
-      </v-card>
-    </v-col>
+    <ChartsUniqueUser />
   </v-row>
 </template>
 <script setup lang="ts">
 const { mobile} = useDisplay();
+
 </script>
 <style scoped>
 .card-data {
