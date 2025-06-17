@@ -25,14 +25,11 @@
             />
           </template>
           <v-card-text class="pa-0">
-            <div 
-              class="chart-container"
-              :style="{ height: chartHeight }"
-            >
-            <canvas
-              :id="chartId"
-            ></canvas>
-            </div>
+            <ChartsCanvasChart
+              :chart-id="chartId"
+              :chart-height="chartHeight"
+              :chart-data="chartData"
+            />
           </v-card-text>
         </v-card>
         <v-btn
@@ -45,6 +42,7 @@
   </v-hover>
 </template>
 <script setup lang="ts">
+import { ChartsCanvasChart } from '#components';
 import Chart from 'chart.js/auto';
 import type { Tag } from '~/types/tag';
 
@@ -78,31 +76,6 @@ const props = defineProps({
     default: () => ({})
   }
 });
-
-const { mobile } = useDisplay();
-
-const chartHeight = computed(() => {
-  return mobile.value ? props.chartHeight.mobile : props.chartHeight.desktop;
-});
-
-onMounted(() => generateChart());
-
-function generateChart() {
-  const canvas = document.getElementById(props.chartId) as HTMLCanvasElement | null;
-
-  if (!canvas) {
-    console.error(`Canvas element not found => ${props.chartId}`, props);
-    return;
-  }
-
-  const ctx = canvas.getContext('2d');
-  if (!ctx) {
-    console.error('Failed to get canvas context', props);
-    return;
-  }
-
-  new Chart(ctx, props.chartData);
-}
 </script>
 <style scoped>
 .card-data {

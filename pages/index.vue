@@ -12,7 +12,7 @@
     </v-col>
   </v-row>
 
-  <v-row class="pa-4">
+  <v-row class="px-4">
     <!-- Highlight Card-->
     <ChartsCardHighlight />
 
@@ -21,6 +21,12 @@
 
     <!-- Unique users Card -->
     <ChartsUniqueUser />
+  </v-row>
+
+  <v-row class="px-4">
+    <v-col class="12" md="12">
+      <ChartsSaleOverview />
+    </v-col>
   </v-row>
 </template>
 <script setup lang="ts">
