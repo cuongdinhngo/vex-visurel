@@ -25,19 +25,23 @@ export const NAV_MENU = [
         subMenu: [
           {
             label: "Getting Started",
-            to: { name: "index" },
+            page: "getting-started",
+            to: { name: "help-center", query: { tab: 'getting-started'} },
           },
           {
             label: "Pricing & Plans",
-            to: { name: "index" },
+            page: "pricing",
+            to: { name: "help-center", query: { tab: 'pricing'} },
           },
           {
             label: "FAQ",
-            to: { name: "index" },
+            page: "faq",
+            to: { name: "help-center", query: { tab: 'faq'} },
           },
           {
             label: "Guides",
-            to: { name: "index" },
+            page: "guides",
+            to: { name: "help-center", query: { tab: 'guides'} },
           },
         ]
       },

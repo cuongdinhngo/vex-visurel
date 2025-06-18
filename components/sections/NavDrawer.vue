@@ -93,6 +93,9 @@
             v-for="subItem in item.subMenu"
             :key="subItem.label"
             :title="subItem.label"
+            link
+            :to="subItem.to"
+            :active="route.query.tab === subItem.page"
           ></v-list-item>
         </v-list-group>
       </template>
