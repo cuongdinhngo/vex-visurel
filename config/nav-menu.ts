@@ -48,7 +48,7 @@ export const NAV_MENU = [
       {
         label: "Calendar",
         icon: "mdi-calendar",
-        to: { name: "index" },
+        to: { name: "calendar" },
       },
       {
         label: "Chat",
