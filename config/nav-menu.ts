@@ -58,7 +58,7 @@ export const NAV_MENU = [
       {
         label: "Mailbox",
         icon: "mdi-mail",
-        to: { name: "index" },
+        to: { name: "mail" },
       },
       {
         label: "Social",
