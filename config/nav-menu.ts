@@ -53,7 +53,7 @@ export const NAV_MENU = [
       {
         label: "Chat",
         icon: "mdi-chat",
-        to: { name: "index" },
+        to: { name: "chat" },
       },
       {
         label: "Mailbox",
