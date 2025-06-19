@@ -84,7 +84,7 @@ export const NAV_MENU = [
           },
           {
             label: "List - Table",
-            to: { name: "index" },
+            to: { name: "contacts-table" },
           }
         ]
       },
