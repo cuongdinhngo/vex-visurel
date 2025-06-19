@@ -3,10 +3,11 @@
   <v-col cols="12" md="8">
     <!-- Social Actions -->
     <v-row class="mb-4">
-      <v-col cols="12" md="12" class="d-flex align-center justify-space-between">
+      <v-col cols="6" md="4"
+        v-for="action in actions"
+        :key="action.title"
+      >
         <v-btn
-          v-for="action in actions"
-          :key="action.title"
           :color="action.color"
           class="d-flex flex-column align-center justify-center text-none"
           variant="text"
