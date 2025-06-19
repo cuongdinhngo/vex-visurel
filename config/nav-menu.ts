@@ -66,11 +66,11 @@ export const NAV_MENU = [
         subMenu: [
           {
             label: "Profile",
-            to: { name: "index" },
+            to: { name: "social" },
           },
           {
             label: "Timeline",
-            to: { name: "index" },
+            to: { name: "social-timeline" },
           }
         ]
       },

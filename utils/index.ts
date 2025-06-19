@@ -27,3 +27,8 @@ export const formatNumber = (num: number, decimals: number = 1): string => {
   // For numbers less than 1000, return as is
   return num.toString();
 };
+
+export const capitalizeFirstLetter = (str: string): string => {
+  if (!str) return str;
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
