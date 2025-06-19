@@ -1,10 +1,9 @@
 <template>
-  <v-row>
-    <v-col
+  <div class="posts-masonry">
+    <div
       v-for="post in posts"
       :key="post.id"
-      cols="12"
-      md="6"
+      class="masonry-item"
     >
       <v-card class="no-gap">
         <v-list-item
@@ -45,8 +44,8 @@
           <span class="text-caption text-grey-darken-2">{{ post.likes }} Likes</span>
         </v-card-actions>
       </v-card>
-    </v-col>
-  </v-row>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -69,3 +68,23 @@ const posts = Array.from({ length: 20 }, (_, index) => {
   };
 });
 </script>
+
+<style scoped>
+.posts-masonry {
+  column-count: 2;
+  column-gap: 24px;
+}
+
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 24px;
+  display: block;
+}
+
+/* Responsive: 1 column on screens <= 600px */
+@media (max-width: 600px) {
+  .posts-masonry {
+    column-count: 1;
+  }
+}
+</style>
