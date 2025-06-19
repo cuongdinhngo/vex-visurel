@@ -80,7 +80,7 @@ export const NAV_MENU = [
         subMenu: [
           {
             label: "List - Grid",
-            to: { name: "index" },
+            to: { name: "contacts-grid" },
           },
           {
             label: "List - Table",
