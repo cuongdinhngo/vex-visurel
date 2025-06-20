@@ -91,7 +91,7 @@ export const NAV_MENU = [
       {
         label: "Scrumboard",
         icon: "mdi-developer-board",
-        to: { name: "index" },
+        to: { name: "scrumboard" },
       },
     ]
   }
