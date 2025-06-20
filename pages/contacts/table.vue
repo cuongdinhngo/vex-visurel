@@ -80,7 +80,7 @@
                 class="text-black rounded-lg my-1"
                 width="90%"
               >
-                <v-list-item-title>{{ tabItem.title }}</v-list-item-title>
+                <v-list-item-title class="text-subtitle-2">{{ tabItem.title }}</v-list-item-title>
               </v-list-item>
             </v-list>
           </v-navigation-drawer>
