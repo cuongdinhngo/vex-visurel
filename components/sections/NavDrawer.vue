@@ -26,12 +26,9 @@
         <span class="text-h5 font-weight-bold text-white">VEX</span>
       </template>
       <template #append>
-        <v-checkbox
-          class="rounded-circle"
-          @click="rail = true"
-          hide-details
-          :value="rail"
-        ></v-checkbox>
+        <ItemsHeaderRailToggle
+          v-model:rail="rail"
+        ></ItemsHeaderRailToggle>
       </template>
 
       <v-card-actions class="d-flex justify-center">
@@ -108,6 +105,7 @@ const drawer = defineModel('drawer', {
   type: Boolean,
 })
 
+import { ItemsHeaderRailToggle } from '#components';
 import { NAV_MENU } from '~/config/nav-menu';
 
 const route = useRoute();
