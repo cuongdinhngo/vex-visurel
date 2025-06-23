@@ -1,11 +1,9 @@
 <template>
   <v-navigation-drawer
     v-model="drawer"
-    app
-    density="compact"
-    nav
-    color="#1F2937"
     :rail="rail"
+    nav app open-on-hover
+    density="compact" color="#1F2937"
     id="main-nav-drawer"
   >
     <v-card
@@ -63,12 +61,19 @@
         <v-list-item
           v-if="!item.subMenu"
           :key="`${item.icon}-${item.label}`"
-          :title="item.label"
           :prepend-icon="item.icon"
-          link
           :to="item.to"
-          :active="route.name === item.page"
+          :active="isActiveMenu(item)"
+          color="primary"
+          link
         >
+          <template #prepend>
+            <v-icon :color="isActiveMenu(item) ? 'primary' : ''">{{ item.icon }}</v-icon>
+          </template>
+          <v-list-item-title
+            :class="{'text-white': isActiveMenu(item)}"
+          >{{ item.label }}
+          </v-list-item-title>
         </v-list-item>
 
         <!-- Sub menu -->
@@ -83,17 +88,27 @@
               :title="item.label"
               :prepend-icon="item.icon"
               :key="`${item.icon}-${item.label}`"
-            ></v-list-item>
+              :active="isActiveMenu(item)"
+              :alt="item.page"
+            >
+              <template #prepend>
+                <v-icon :color="isActiveMenu(item) ? 'primary' : ''">{{ item.icon }}</v-icon>
+              </template>
+            </v-list-item>
           </template>
           <!-- Sub Items -->
           <v-list-item
             v-for="subItem in item.subMenu"
             :key="subItem.label"
-            :title="subItem.label"
-            link
             :to="subItem.to"
-            :active="route.query.tab === subItem.page"
-          ></v-list-item>
+            :active="isActiveMenu(subItem)"
+            color="primary"
+            link
+          >
+            <v-list-item-title
+              :class="{'text-white': isActiveMenu(subItem)}"
+            >{{ subItem.label }}</v-list-item-title>
+          </v-list-item>
         </v-list-group>
       </template>
     </v-list>
@@ -107,9 +122,15 @@ const drawer = defineModel('drawer', {
 
 import { ItemsHeaderRailToggle } from '#components';
 import { NAV_MENU } from '~/config/nav-menu';
+import type { NavMenuItem } from '~/config/nav-menu';
 
 const route = useRoute();
 const rail = ref(false);
 
 const logoNav = computed(() => `${useRuntimeConfig().app.baseURL}/logo.svg`);
+
+function isActiveMenu(item: NavMenuItem): boolean {
+  console.log('Checking active menu for:', item, route.name);
+  return route.name === item.page || route.query.tab === item.page;
+} 
 </script>

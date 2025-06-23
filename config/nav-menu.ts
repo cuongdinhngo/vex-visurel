@@ -1,3 +1,11 @@
+export interface NavMenuItem {
+  label: string;
+  page?: string;
+  icon?: string;
+  to?: { name: string; query?: Record<string, any> };
+  subMenu?: NavMenuItem[];
+}
+
 export const NAV_MENU = [
   {
     group: "Dashboards",
@@ -21,6 +29,7 @@ export const NAV_MENU = [
       },
       {
         label: "Help Center",
+        page: "help-center",
         icon: "mdi-help-circle",
         subMenu: [
           {
@@ -48,48 +57,60 @@ export const NAV_MENU = [
       {
         label: "Calendar",
         icon: "mdi-calendar",
+        page: "calendar",
+        count: 5,
+        color: "primary",
         to: { name: "calendar" },
       },
       {
         label: "Chat",
         icon: "mdi-chat",
+        page: "chat",
         to: { name: "chat" },
       },
       {
         label: "Mailbox",
         icon: "mdi-mail",
+        page: "mail",
         to: { name: "mail" },
       },
       {
         label: "Social",
+        page: "social",
         icon: "mdi-account-group",
         subMenu: [
           {
             label: "Profile",
+            page: "social",
             to: { name: "social" },
           },
           {
             label: "Timeline",
+            page: "social-timeline",
             to: { name: "social-timeline" },
           }
         ]
       },
       {
         label: "Contacts",
+        page: "contacts",
         icon: "mdi-account-multiple",
         subMenu: [
           {
             label: "List - Grid",
+            page: "contacts-grid",
             to: { name: "contacts-grid" },
           },
           {
             label: "List - Table",
+            page: "contacts-table",
             to: { name: "contacts-table" },
           }
         ]
       },
       {
         label: "Scrumboard",
+        page: "scrumboard",
         icon: "mdi-developer-board",
         to: { name: "scrumboard" },
       },

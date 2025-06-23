@@ -4,6 +4,7 @@
     empty-icon="mdi-circle-outline"
     full-icon="mdi-record-circle-outline"
     clearable
+    size="x-small"
     :value="rail"
     @click="rail = !rail"
   ></v-rating>
