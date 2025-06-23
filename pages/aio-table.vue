@@ -78,7 +78,6 @@
                 density="compact"
                 color="primary"
                 v-model="searchQuery"
-                @keyup.enter="resizeWrapper(false)"
               />
             </div>
             <v-spacer></v-spacer>

@@ -19,7 +19,7 @@ const { mobile } = useDisplay();
 
 const isFullWidth = defineModel('isFullWidth', {
   type: Boolean,
-  default: false,
+  default: true,
 });
 
 function handleResize(isBoxed: boolean = true) {
