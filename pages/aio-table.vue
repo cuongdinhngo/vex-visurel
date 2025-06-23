@@ -34,18 +34,10 @@
 
             <v-spacer></v-spacer>
 
-            <div class="page-actions d-flex align-center" v-if="!mobile">
-              <div
-                @click="resizeWrapper(true)"
-                class="px-5 py-3 rounded-ts-xl rounded-bs-xl"
-                :class="[isFullWidth === false ? 'bg-grey border-thin border-white' : 'bg-grey-lighten-3']"
-              >Boxed</div>
-              <div
-                @click="resizeWrapper(false)"
-                class="px-5 py-3 rounded-te-xl rounded-be-xl"
-                :class="[ isFullWidth ? 'bg-grey border-thin border-white' : 'bg-grey-lighten-3']"
-              >Full-Width</div>
-            </div>
+            <!-- Resize Configuration -->
+            <AioResize
+              @resize="resizeWrapper"
+            />
           </v-col>
         </v-row>
 
@@ -68,6 +60,7 @@
                   icon="mdi-trash-can"
                   variant="text"
                   color="primary"
+                  @click="handleDelete"
                 />
                 <v-btn
                   icon="mdi-folder-cog"
@@ -84,20 +77,45 @@
                 :width="selected.length && mobile ? '50px' : '200px'"
                 density="compact"
                 color="primary"
+                v-model="searchQuery"
+                @keyup.enter="resizeWrapper(false)"
               />
             </div>
             <v-spacer></v-spacer>
             <div class="page-actions pr-3 d-flex align-center ga-1">
               <v-btn
                 variant="text"
-                icon="mdi-filter-variant"
                 size="40"
-              />
-              <v-btn
-                icon="mdi-plus"
-                color="primary"
-                size="40"
-              />
+              >
+                <v-icon>mdi-filter-variant</v-icon>
+                <v-menu activator="parent" :close-on-content-click=false>
+                  <v-list>
+                    <v-list-item
+                      v-for="(item, index) in originalHeaders"
+                      :key="index"
+                      :value="item.value"
+                      density="compact"
+                      nav
+                      slim
+                      class="ma-0"
+                    >
+                      <template v-slot:prepend>
+                        <v-checkbox
+                          v-model="selectedHeader"
+                          :label="item.title"
+                          :value="item.value"
+                          hide-details
+                          color="primary"
+                          class="ma-0 pa-0"
+                        />
+                      </template>
+                    </v-list-item>
+                  </v-list>
+                </v-menu>
+              </v-btn>
+
+              <!-- Add Account -->
+              <AioAddAccount />
             </div>
           </v-col>
         </v-row>
@@ -105,6 +123,7 @@
     </v-main>
   </v-layout>
 
+  <!-- Data Table -->
   <v-container fluid class="pt-0 px-10">
     <v-row>
       <v-col
@@ -112,98 +131,26 @@
         :md="wrapperCols"
         class="px-0 mx-auto"
       >
-        <v-data-table
-          v-model="selected"
+        <AioDataTable
+          :search-query="searchQuery"
+          v-model:selected="selected"
           :headers="headers"
-          :items="contacts"
-          item-value="name"
-          show-select
-        >
-          <template v-slot:item.name="{ item }">
-            <v-list-item
-              :key="item.id"
-              density="comfortable"
-              class="pa-0"
-            >
-              <template v-slot:prepend>
-                <v-avatar
-                  :image="item.avatar"
-                />
-              </template>
-              <v-list-item-title class="text-subtitle-2">{{ item.name }}</v-list-item-title>
-            </v-list-item>
-          </template>
-
-          <template v-slot:item.contacts="{ item }">
-            <v-btn
-              icon="mdi-email"
-              variant="tonal"
-              size="35"
-              color="primary"
-            />
-            <v-btn
-              icon="mdi-phone"
-              variant="text"
-              size="35"
-              color="green"
-            />
-            <v-btn
-              icon="mdi-chat"
-              variant="tonal"
-              size="35"
-              color="purple"
-            />
-          </template>
-
-          <template v-slot:item.skills="{ item }">
-            <v-chip
-              v-for="skill in item.skills"
-              :key="skill"
-              class="ma-1"
-              color="primary"
-              text-color="white"
-              size="small"
-            >
-              {{ skill }}
-            </v-chip>
-          </template>
-
-          <template v-slot:item.actions="{ item }">
-            <v-btn
-              icon="mdi-dots-vertical"
-              variant="text"
-            >
-            </v-btn>
-            <v-menu activator="parent">
-              <v-list>
-                <v-list-item
-                  v-for="(item, index) in actions"
-                  :key="index"
-                  :value="index"
-                  :prepend-icon="item.icon"
-                >
-                  <v-list-item-title>{{ item.title }}</v-list-item-title>
-                </v-list-item>
-              </v-list>
-            </v-menu>
-          </template>
-        </v-data-table>
+        />
       </v-col>
     </v-row>
   </v-container>
 </template>
 <script setup lang="ts">
-import { faker } from '@faker-js/faker';
-
 const { mobile } = useDisplay();
 const wrapperCols = ref(12);
-const isFullWidth = ref(true);
+const { deleteAccount } = useAccounts();
 
-const actions = [
-  { title: 'Modify', icon: 'mdi-pencil' },
-  { title: 'Delete', icon: 'mdi-delete' },
-];
 const selected = ref([]);
+const searchQuery = ref('');
+const selectedHeader = ref([
+  'name', 'address', 'skills', 'email', 'actions'
+]);
+const headers = ref([]);
 
 const selectedCount = computed(() => {
   return selected.value.length ? 
@@ -211,30 +158,46 @@ const selectedCount = computed(() => {
     'Customers';
 });
 
-const headers = ref([
-  { title: 'Name', key: 'name', align: 'start' },
-  { title: '', key: 'contacts', align: 'start', sortable: false },
-  { title: 'Address', key: 'address', align: 'start' },
-  { title: 'Phone', key: 'phone', align: 'start' },
-  { title: 'Skills', key: 'skills', align: 'start' },
-  { title: '', key: 'actions', align: 'end', sortable: false },
-])
+onMounted(() => {
+  headers.value = originalHeaders.filter(header => 
+    selectedHeader.value.includes(header.value)
+  );
+});
 
-const skills = ['PM', 'BE', 'FE', 'BA', 'SA', 'TA', 'HR'];
+watch(
+  selectedHeader,
+  (newHeaders) => {
+    headers.value = originalHeaders.filter(header => 
+      newHeaders.includes(header.value)
+    );
+});
 
-const contacts = Array.from({ length: 50 }, (_, index) => ({
-  id: index + 1,
-  name: faker.person.fullName(),
-  avatar: faker.image.avatar(),
-  address: faker.location.streetAddress({ useFullAddress: true }),
-  phone: faker.phone.number(),
-  skills: faker.helpers.arrayElements(skills, { min: 1, max: 3 })
-}));
+const originalHeaders = [
+  { title: 'ID', value: 'id', sortable: true, key: 'id', align: 'start' },
+  { title: 'Name', value: 'name', sortable: true, key: 'name', align: 'start' },
+  { title: 'First Name', value: 'firstName', sortable: true, key: 'firstName', align: 'start' },
+  { title: 'Last Name', value: 'lastName', sortable: true, key: 'lastName', align: 'start' },
+  { title: 'Address', value: 'address', sortable: false, key: 'address', align: 'start' },
+  { title: 'Skills', value: 'skills', sortable: false, key: 'skills', align: 'start' },
+  { title: 'Email', value: 'email', sortable: true, key: 'email', align: 'start' },
+  { title: 'Phone', value: 'phone', sortable: true, key: 'phone', align: 'start' },
+  { title: 'Actions', value: 'actions', sortable: false, key: 'actions', align: 'end' },
+];
 
 function resizeWrapper(isBoxed: boolean = true) {
-  isFullWidth.value = !isBoxed;
   wrapperCols.value = !mobile.value && isBoxed ? 10 : 12;
 }
+
+function handleDelete() {
+  console.log('Selected accounts for deletion:', selected.value);
+  if (selected.value.length) {
+    selected.value.forEach(account => {
+      deleteAccount(account);
+    });
+    selected.value = [];
+  }
+}
+
 </script>
 <style scoped>
 .header-container {
@@ -242,8 +205,5 @@ function resizeWrapper(isBoxed: boolean = true) {
 }
 .table-header {
   background-color: #e5e7eb;
-}
-.border-white {
-  border-color: #ffffff !important;
 }
 </style>
