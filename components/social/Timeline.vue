@@ -29,7 +29,7 @@
         <v-textarea
           placeholder="What's on your mind?"
           rows="2"
-          variant="text"
+          variant="plain"
           auto-grow
           hide-details
         ></v-textarea>
