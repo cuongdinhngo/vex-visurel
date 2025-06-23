@@ -41,7 +41,7 @@
       </template>
 
       <!-- Notification List -->
-      <v-card-text class="bg-background">
+      <v-card-text class="bg-background pa-0">
         <v-virtual-scroll
           :items="notifications"
           height="320"
