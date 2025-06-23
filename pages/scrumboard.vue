@@ -18,9 +18,10 @@
 
         <div>
           <ScrumboardAvatar
-            v-for="i in 3"
-            :key="i"
-            :image="`https://cdn.vuetifyjs.com/images/lists/${i}.jpg`"
+            v-for="assignee in ASSIGNEES"
+            :key="assignee.id"
+            :image="assignee.avatar"
+            :isLimited="false"
             :size="24"
           />
         </div>
@@ -29,20 +30,21 @@
 
     <!-- Board Content -->
     <div class="scrumboard-row px-6 mt-6">
-      <ScrumboardColumn />
-
-      <ScrumboardColumn />
-
-      <ScrumboardColumn />
-
-      <ScrumboardColumn />
-
-      <ScrumboardColumn />
+      <ScrumboardColumn
+        v-for="(column, index) in columns"
+        :key="index"
+        :title="column.name"
+        :tasks="column.tasks"
+      />
+      
+      <!-- Add New List -->
+      <ScrumboardAddList />
     </div>
   </v-container>
 </template>
 
 <script setup lang="ts">
+const { columns, ASSIGNEES } = useScrumboard();
 </script>
 
 <style scoped>

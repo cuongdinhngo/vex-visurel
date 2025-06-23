@@ -1,18 +1,29 @@
 <template>
   <v-avatar
     :size="size"
-    :image="image"
-  ></v-avatar>
+    :color="isLimited ? 'grey' : ''"
+  >
+    <span v-if=isLimited :class="textFontSize">{{ image }}</span>
+    <v-img v-else :src="image"></v-img>
+  </v-avatar>
 </template>
 <script setup lang="ts">
 const props = defineProps({
   image: {
     type: String,
-    default: 'https://cdn.vuetifyjs.com/images/lists/1.jpg'
+    default: ''
   },
   size: {
     type: [Number, String],
     default: 24
+  },
+  isLimited: {
+    type: Boolean,
+    default: true
+  },
+  textFontSize: {
+    type: String,
+    default: 'text-caption'
   }
 })
 </script>

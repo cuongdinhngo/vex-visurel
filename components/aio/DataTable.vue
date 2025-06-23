@@ -123,15 +123,6 @@ const selectedCount = computed(() => {
     'Customers';
 });
 
-// const headers = ref([
-//   { title: 'Name', key: 'name', align: 'start' },
-//   { title: '', key: 'contacts', align: 'start', sortable: false },
-//   { title: 'Address', key: 'address', align: 'start' },
-//   { title: 'Phone', key: 'phone', align: 'start' },
-//   { title: 'Skills', key: 'skills', align: 'start' },
-//   { title: '', key: 'actions', align: 'end', sortable: false },
-// ])
-
 function handleAction(event: string, account: Account) {
   console.log('Action:', event, 'on account:', account);
   switch (event) {
