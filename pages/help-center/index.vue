@@ -13,32 +13,24 @@
         <h3 class="text-h4">Hello, how can we help?</h3>
       </v-col>
       <v-col cols="12" md="9">
-        <v-list-item
-          id="header-search-dialog"
-          variant="text"
-          :width="mobile ? '100%' : '60%'"
-          class="mx-auto rounded-pill bg-white"
-          slim
+        <v-text-field
+          placeholder="Search for answers..."
+          variant="plain"
+          width="50%"
+          hide-details
+          class="mx-auto bg-white rounded-pill pb-4 px-5"
         >
-          <template #prepend>
-            <v-icon>mdi-magnify</v-icon>
-          </template>
-          <template #append>
+          <template #append-inner>
             <v-btn
               class="rounded-pill bg-primary text-white"
               variant="tonal"
+              size="small"
             >Search</v-btn>
           </template>
-          <v-list-item-title>
-            <v-text-field
-              class="search-input"
-              variant=""
-              placeholder="Search for answers..."
-              hide-details
-              density="compact"
-            ></v-text-field>
-          </v-list-item-title>
-        </v-list-item>
+          <template #prepend-inner>
+            <v-icon>mdi-magnify</v-icon>
+          </template>
+        </v-text-field>
       </v-col>
     </v-row>
 
