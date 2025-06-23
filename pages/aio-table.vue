@@ -1,12 +1,12 @@
 <template>
   <v-layout>
     <v-main class="header-container">
-      <v-container :fluid="isFluid" class="pb-0">
+      <v-container fluid class="pb-0 px-10">
         <v-row class="py-4">
           <v-col
             cols="12"
-            md="12"
-            class="d-flex align-center"
+            :md="wrapperCols"
+            class="d-flex align-center mx-auto"
           >
             <div class="page-info">
               <h5 class="text-subtitle-1 font-weight-bold">All-In-One Table</h5>
@@ -34,26 +34,26 @@
 
             <v-spacer></v-spacer>
 
-            <div class="page-actions" v-if="!mobile">
-              <span
-                @click="isFluid = false"
+            <div class="page-actions d-flex align-center" v-if="!mobile">
+              <div
+                @click="resizeWrapper(true)"
                 class="px-5 py-3 rounded-ts-xl rounded-bs-xl"
-                :class="[isFluid === false ? 'bg-grey' : 'bg-grey-lighten-3']"
-              >Boxed</span>
-              <span
-                @click="isFluid = true"
+                :class="[isFullWidth === false ? 'bg-grey border-thin border-white' : 'bg-grey-lighten-3']"
+              >Boxed</div>
+              <div
+                @click="resizeWrapper(false)"
                 class="px-5 py-3 rounded-te-xl rounded-be-xl"
-                :class="[ isFluid ? 'bg-grey' : 'bg-grey-lighten-3']"
-              >Full-Width</span>
+                :class="[ isFullWidth ? 'bg-grey border-thin border-white' : 'bg-grey-lighten-3']"
+              >Full-Width</div>
             </div>
           </v-col>
         </v-row>
 
-        <v-row class="table-header pb-4 rounded-lg">
+        <v-row class="pb-2">
           <v-col
             cols="12"
-            md="12"
-            class="d-flex"
+            :md="wrapperCols"
+            class="d-flex mx-auto table-header rounded-t-lg"
           >
             <div class="page-info d-flex align-center ga-3">
               <h5
@@ -105,9 +105,13 @@
     </v-main>
   </v-layout>
 
-  <v-container :fluid="isFluid" class="pt-0">
+  <v-container fluid class="pt-0 px-10">
     <v-row>
-      <v-col cols="12" md="12" class="px-0">
+      <v-col
+        cols="12"
+        :md="wrapperCols"
+        class="px-0 mx-auto"
+      >
         <v-data-table
           v-model="selected"
           :headers="headers"
@@ -192,7 +196,9 @@
 import { faker } from '@faker-js/faker';
 
 const { mobile } = useDisplay();
-const isFluid = ref(false);
+const wrapperCols = ref(12);
+const isFullWidth = ref(true);
+
 const actions = [
   { title: 'Modify', icon: 'mdi-pencil' },
   { title: 'Delete', icon: 'mdi-delete' },
@@ -224,6 +230,11 @@ const contacts = Array.from({ length: 50 }, (_, index) => ({
   phone: faker.phone.number(),
   skills: faker.helpers.arrayElements(skills, { min: 1, max: 3 })
 }));
+
+function resizeWrapper(isBoxed: boolean = true) {
+  isFullWidth.value = !isBoxed;
+  wrapperCols.value = !mobile.value && isBoxed ? 10 : 12;
+}
 </script>
 <style scoped>
 .header-container {
@@ -231,5 +242,8 @@ const contacts = Array.from({ length: 50 }, (_, index) => ({
 }
 .table-header {
   background-color: #e5e7eb;
+}
+.border-white {
+  border-color: #ffffff !important;
 }
 </style>
