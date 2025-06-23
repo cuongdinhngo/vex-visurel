@@ -130,7 +130,6 @@ const rail = ref(false);
 const logoNav = computed(() => `${useRuntimeConfig().app.baseURL}/logo.svg`);
 
 function isActiveMenu(item: NavMenuItem): boolean {
-  console.log('Checking active menu for:', item, route.name);
   return route.name === item.page || route.query.tab === item.page;
 } 
 </script>
