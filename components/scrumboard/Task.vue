@@ -66,8 +66,9 @@
     width="auto"
   >
     <v-card
-      max-width="800" min-width="600" class="text-black"
+      max-width="800" min-width="600" class="text-black elevation-0"
       prepend-icon="mdi-file-document-edit-outline"
+      tile
     >
       <template #title>
         <v-text-field
@@ -93,69 +94,45 @@
         <span>{{ mapStatus(task.status) }}</span>
       </v-card-title>
 
+      <!-- Modify Members/Labels -->
       <v-card-title class="d-flex justify-space-between align-center text-subtitle-2 ml-10">
-        <div>
-          <span>Members</span>
-          <div class="d-flex align-center mt-2">
-            <ScrumboardAvatar
-              v-for="(assignee, idx) in task.assignees"
-              :key="idx"
-              :image="assignee.avatar"
-              :isLimited="false"
-              size="32"
-            />
-            <ScrumboardAvatar
-              image="+"
-              :isLimited="true"
-              :text-font-size="'text-h6'"
-              size="32"
-              id="menu-activator"
-            />
-            <v-menu activator="#menu-activator" :close-on-content-click="false" width="auto">
-              <v-card  min-width="300" class="pa-4">
-                <v-checkbox
-                  v-for="assignee in ASSIGNEES"
-                  :key="assignee.id"
-                  :label="assignee.name"
-                  :value="assignee.id"
-                  v-model="taskAssignees"
-                  density="compact"
-                  nav
-                  hide-details
-                  color="primary"
-                  @change="updateTaskAssignees"
-                ></v-checkbox>
-              </v-card>
-
-            </v-menu>
-          </div>
-        </div>
-
+        <ScrumboardModifyMembers
+          v-model:task="task"
+        />
         <v-spacer></v-spacer>
 
-        <div class="text-end">
-          <span class="text-end">Labels</span>
-          <div class="d-flex align-center mt-2">
-            <span
-              v-for="(label, index) in labels"
-              :key="index"
-              :class="[`bg-${label.color}`, 'py-1 px-2 ml-2 rounded-lg text-white']"
-            >
-              {{ label.name }}
-            </span>
-          </div>
-        </div>
+        <ScrumboardModifyLabels
+          v-model:task="task"
+        />
       </v-card-title>
+
+      <v-divider></v-divider>
+
+      <v-card-text>
+        <!-- Description -->
+        <ScrumboardModifyDescription
+          v-model:task="task"
+        />
+
+        <!-- Attachments -->
+        <ScrumboardModifyAttachments
+          v-model:task="task"
+        />
+
+        <!-- Comments -->
+        <ScrumboardModifyComments
+          v-model:task="task"
+        />
+      </v-card-text>
     </v-card>
   </v-dialog>
 </template>
 <script setup lang="ts">
-import type { Task, LABELS, ASSIGNEES } from '@/composables/useScrumboard';
-const props = defineProps({
-  task: {
-    type: Object as () => Task,
-    required: true
-  }
+import type { Task, LABELS } from '@/composables/useScrumboard';
+
+const task = defineModel('task', {
+  type: Object as () => Task,
+  required: true
 });
 
 const { mapStatus } = useScrumboard();
@@ -164,28 +141,14 @@ const dialogState = reactive({
   value: false
 });
 
-const taskAssignees = ref([]);
-
-const selectedAssignees = computed(() => {
-  return props.task.assignees?.map(assignee => assignee.id) || [];
-});
-
-function updateTaskAssignees() {
-  if (props.task.assignees) {
-    props.task.assignees = ASSIGNEES.filter(assignee => selectedAssignees.value.includes(assignee.id));
-  } else {
-    props.task.assignees = [];
-  }
-}
-
 const coverImage = computed(() => {
-  if (props.task.attachments && props.task.attachments.length > 0) {
-    return props.task.attachments.filter(item => item.isCover)[0]?.url || '';
+  if (task.value.attachments && task.value.attachments.length > 0) {
+    return task.value.attachments.filter(item => item.isCover)[0]?.url || '';
   }
 });
 
 const labels = computed(() => {
-  return props.task.labels.map(label => {
+  return task.value.labels.map(label => {
     const labelData = LABELS.find(l => l.id === label);
     return labelData;
   });
@@ -193,11 +156,11 @@ const labels = computed(() => {
 
 const avatarImages = computed(() => {
   let assignees = [];
-  if (props.task.assignees && props.task.assignees.length > 2) {
-    assignees = props.task.assignees.slice(0, 2).map(assignee => assignee.avatar);
-    assignees.push(`+${props.task.assignees.length - 2}`);
+  if (task.value.assignees && task.value.assignees.length > 2) {
+    assignees = task.value.assignees.slice(0, 2).map(assignee => assignee.avatar);
+    assignees.push(`+${task.value.assignees.length - 2}`);
   } else {
-    assignees = props.task.assignees?.map(assignee => assignee.avatar) || [];
+    assignees = task.value.assignees?.map(assignee => assignee.avatar) || [];
   }
 
   return assignees
@@ -211,5 +174,4 @@ const avatarImages = computed(() => {
   display: block;
   border-radius: 5px;
 }
-
 </style>

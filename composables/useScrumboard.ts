@@ -2,6 +2,7 @@ import { fa, faker } from "@faker-js/faker";
 
 export interface Attachment {
   url: string;
+  name: string;
   isCover: boolean;
 }
 
@@ -61,13 +62,13 @@ const columns = reactive([
           {
             id: faker.string.uuid(),
             content: 'This is a comment for task 1',
-            authorId: ASSIGNEES[0].avatar,
+            authorId: ASSIGNEES[0].id,
             createdAt: faker.date.past().toISOString()
           },
           {
             id: faker.string.uuid(),
             content: 'Another comment for task 1',
-            authorId: ASSIGNEES[1].avatar,
+            authorId: ASSIGNEES[1].id,
             createdAt: faker.date.past().toISOString()
           }
         ],
@@ -88,10 +89,12 @@ const columns = reactive([
         attachments: [
           {
             url: `https://picsum.photos/id/${ faker.number.int({ min: 1, max: 500 }) }/300/200`,
+            name: `${faker.lorem.sentence({ min: 1, max: 3 })}jpg`,
             isCover: true
           },
           {
             url: `https://picsum.photos/id/${ faker.number.int({ min: 1, max: 500 }) }/300/200`,
+            name: `${faker.lorem.sentence({ min: 1, max: 3 })}jpg`,
             isCover: false
           }
         ]
@@ -104,7 +107,7 @@ const columns = reactive([
           {
             id: faker.string.uuid(),
             content: 'This is a comment for task 2',
-            authorId: ASSIGNEES[1].avatar,
+            authorId: ASSIGNEES[1].id,
             createdAt: faker.date.past().toISOString()
           }
         ],
@@ -135,19 +138,19 @@ const columns = reactive([
           {
             id: faker.string.uuid(),
             content: 'This is a comment for task 14',
-            authorId: ASSIGNEES[2].avatar,
+            authorId: ASSIGNEES[2].id,
             createdAt: faker.date.past().toISOString()
           },
           {
             id: faker.string.uuid(),
             content: 'Another comment for task 14',
-            authorId: ASSIGNEES[3].avatar,
+            authorId: ASSIGNEES[3].id,
             createdAt: faker.date.past().toISOString()
           },
           {
             id: faker.string.uuid(),
             content: 'Yet another comment for task 14',
-            authorId: ASSIGNEES[4].avatar,
+            authorId: ASSIGNEES[4].id,
             createdAt: faker.date.past().toISOString()
           }
         ],
@@ -210,10 +213,12 @@ const columns = reactive([
         attachments: [
           {
             url: `https://picsum.photos/id/${ faker.number.int({ min: 1, max: 500 }) }/300/200`,
+            name: `${faker.lorem.sentence({ min: 1, max: 3 })}jpg`,
             isCover: true
           },
           {
             url: `https://picsum.photos/id/${ faker.number.int({ min: 1, max: 500 }) }/300/200`,
+            name: `${faker.lorem.sentence({ min: 1, max: 3 })}jpg`,
             isCover: false
           }
         ]
@@ -232,7 +237,7 @@ const columns = reactive([
           {
             id: faker.string.uuid(),
             content: 'This is a comment for task 6',
-            authorId: ASSIGNEES[5].avatar,
+            authorId: ASSIGNEES[5].id,
             createdAt: faker.date.past().toISOString()
           }
         ],
@@ -265,7 +270,7 @@ const columns = reactive([
           {
             id: faker.string.uuid(),
             content: 'This is a comment for task 8',
-            authorId: ASSIGNEES[6].avatar,
+            authorId: ASSIGNEES[6].id,
             createdAt: faker.date.past().toISOString()
           }
         ],
@@ -282,6 +287,7 @@ const columns = reactive([
         attachments: [
           {
             url: `https://picsum.photos/id/${ faker.number.int({ min: 1, max: 500 }) }/300/200`,
+            name: `${faker.lorem.sentence({ min: 1, max: 3 })}jpg`,
             isCover: true
           }
         ]
