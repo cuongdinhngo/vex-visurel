@@ -72,7 +72,7 @@ export const NAV_MENU = [
         label: "Mailbox",
         icon: "mdi-mail",
         page: "mail",
-        to: { name: "mail" },
+        to: { name: "mail-category", params: { category: 'inbox' } },
       },
       {
         label: "Social",

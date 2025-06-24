@@ -69,9 +69,9 @@
                   <v-list-item-title class="text-black">
                     {{ chat.name }}
                   </v-list-item-title>
-                  <v-list-subtitle class="text-caption">
+                  <v-list-item-subtitle class="text-caption">
                     {{ chat.lastMessage }}
-                  </v-list-subtitle>
+                  </v-list-item-subtitle>
                   <template #append>
                     <span class="text-caption">{{ formatTimeAgo(new Date(chat.timestamp)) }}</span>
                   </template>
