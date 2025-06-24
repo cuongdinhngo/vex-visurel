@@ -18,6 +18,6 @@
 
 .read-message {
   position: relative;
-  top: 80px;
+  top: 20px;
 }
 </style>
