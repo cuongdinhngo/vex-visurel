@@ -37,14 +37,45 @@
         </v-list-item>
 
         <div :class="['d-flex align-center header-actions px-4 border-b-thin', { 'mr-4': !mobile }]">
-          <div>
+          <div class="">
             <v-checkbox
               v-model="selectAll"
               color="primary"
               hide-details
               density="compact"
-              multiple
+              @update:model-value="toggleAll"
             />
+          </div>
+          <div
+            class="border-s-thin d-flex align-center ml-4 ga-4 pl-4"
+            v-if="selectAll || selected.length > 0"
+          >
+            <v-btn
+              icon
+              variant="text"
+              color="primary"
+              density="compact"
+              class="text-none"
+            >
+              <v-icon>mdi-delete</v-icon>
+              <v-tooltip
+                activator="parent"
+                location="bottom"
+              >Delte</v-tooltip>
+            </v-btn>
+            <v-btn
+              icon
+              variant="text"
+              color="primary"
+              density="compact"
+              class="text-none"
+            >
+              <v-icon>mdi-email-open</v-icon>
+              <v-tooltip
+                activator="parent"
+                location="bottom"
+              >Mark as read</v-tooltip>
+            </v-btn>
           </div>
           <v-spacer></v-spacer>
           <div>
@@ -72,6 +103,7 @@
             >
               <MailboxMailList
                 v-model:selectAll="selectAll"
+                v-model:selected="selected"
               />
             </v-col>
 
@@ -92,15 +124,32 @@
 <script setup lang="ts">
 import { faker } from '@faker-js/faker';
 import { formatTimeAgo } from '@vueuse/core';
+import { nextTick } from 'vue';
 
 const { mobile } = useDisplay();
 const { mails, getMailsViaCategory, getMailsViaLabel } = useMails();
 
 const mailId = useRouteParams('id', null);
-const selectAll = ref([]);
+const selectAll = ref(false);
+const selected = ref([]);
 const expandSenderInfo = ref(false);
 const mailDrawer = ref(mobile.value ? false : true);
 const isShowMailList = ref(mobile.value && mailId.value ? true : false);
+
+function toggleAll(value) {
+  if (value) {
+    selected.value = mails.value.map(mail => mail.id);
+    selectAll.value = value;
+    nextTick(() => {
+      selectAll.value = value;
+    });
+  } else {
+    selected.value = [];
+    nextTick(() => {
+      selectAll.value = false;
+    });
+  }
+}
 
 watch(mailId, (newId) => {
   console.log('Mail ID changed:', newId);

@@ -19,11 +19,11 @@
               <v-avatar
                 size="40"
                 :image="mail.sender.avatar"
-                v-if="!isHovering"
+                v-if="!isHovering && !selected.includes(mail.id)"
               />
               <v-checkbox
-                v-if="isHovering"
-                v-model="selectAll"
+                v-if="isHovering || selected.includes(mail.id)"
+                v-model="selected"
                 :value="mail.id"
                 color="primary"
                 hide-details
@@ -86,13 +86,25 @@ const category = useRouteParams('category', 'inbox');
 
 const mailList = ref<Mail[]>([]);
 const selectAll = defineModel('selectAll', {
-  type: Array as () => string[],
+  type: Boolean,
   default: false
+});
+const selected = defineModel('selected', {
+  type: Array as () => string[],
+  default: []
 });
 
 function isCategory() {
   return CATEGORIES.some(cat => cat.id === category.value);
 }
+
+watch(
+  [selected, mailList],
+  ([newSelected, newMailList]) => {
+    selectAll.value = newSelected.length === newMailList.length && newMailList.length > 0;
+  },
+  { deep: true }
+)
 
 onMounted(() => {
   if (category.value && isCategory()) {

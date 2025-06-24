@@ -48,7 +48,8 @@
       <v-card
         v-show="expandSenderInfo"
         variant="outlined"
-        class="pa-2"
+        class="pa-2 text-wrap mx-auto"
+        width="90%"
         @click.stop="expandSenderInfo = false"
       >
         <v-list-item-title class="text-subtitle-2">
@@ -68,7 +69,7 @@
         </v-list-item-title>
       </v-card>
     </v-expand-transition>
-    <v-card-text class="text-body-2">
+    <v-card-text class="text-body-2 text-wrap">
       {{ mail?.body }}
     </v-card-text>
   </v-card>
