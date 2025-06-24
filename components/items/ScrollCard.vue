@@ -1,11 +1,26 @@
 <template>
-  <v-card-text class="py-0 scrumboard-tasks">
+  <v-card-text
+    class="py-0 scrumboard-tasks"
+    :min-height="minHeight"
+    :max-height="maxHeight"
+  >
     <slot />
   </v-card-text>
 </template>
+<script lang="ts" setup>
+defineProps({
+  maxHeight: {
+    type: [String, Number],
+    default: '600'
+  },
+  minHeight: {
+    type: [String, Number],
+    default: '450'
+  }
+});
+</script>
 <style scoped>
 .scrumboard-tasks {
-  max-height: 600px;
   overflow-y: scroll;
 }
 
