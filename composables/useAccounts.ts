@@ -36,7 +36,6 @@ const accounts: Account[] = reactive(Array.from({ length: 50 }, (_, index) => {
 
 export const useAccounts = () => {
   const addAccount = (account: Account) => {
-    console.log('Adding account:', account);
     if (!account.id) {
       account.id = accounts.length + 1; // Assign a new ID
     }
@@ -69,13 +68,9 @@ export const useAccounts = () => {
   }
 
   const searchAccounts = (query: string) => {
-    console.log('Searching accounts with query:', query);
     if (!query) return accounts;
     const lowerQuery = query.toLowerCase();
-    console.log('Lowercase query:', lowerQuery);
-    console.log('Fitelring accounts with query:', lowerQuery);
     accounts.filter(account => {
-      console.log('Checking account:', account.name, account.name.toLowerCase().includes(lowerQuery));
       return account.name.toLowerCase().includes(lowerQuery) ||
       account.email.toLowerCase().includes(lowerQuery)
     });

@@ -124,7 +124,6 @@ const selectedCount = computed(() => {
 });
 
 function handleAction(event: string, account: Account) {
-  console.log('Action:', event, 'on account:', account);
   switch (event) {
     case 'modify':
       openEditDialog(account);
@@ -136,21 +135,17 @@ function handleAction(event: string, account: Account) {
 }
 
 function openEditDialog(account: Account) {
-  console.log('Editing account:', account);
   editingAccount.value = { ...account };
   editDialog.value = true;
 }
 
 function openEditDialogByClickingRow(event: PointerEvent, row: { item: Account }) {
   const account = row.item;
-  console.log('Row clicked, editing account:', { ...account });
   editingAccount.value = { ...account };
   editDialog.value = true;
 }
 
 function removeAccount(account: Account) {
-  // Logic to delete the account
-  console.log('Delete account:', account);
   deleteAccount(account.id);
 }
 

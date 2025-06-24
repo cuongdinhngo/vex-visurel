@@ -94,7 +94,6 @@ function isCategory() {
 }
 
 onMounted(() => {
-  console.log('Mounted Mail List Component');
   if (category.value && isCategory()) {
     mailList.value = getMailsViaCategory(category.value);
   } else {

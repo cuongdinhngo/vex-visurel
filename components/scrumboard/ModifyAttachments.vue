@@ -77,11 +77,9 @@ const task = defineModel('task', {
 });
 
 function markAsCover(index: number) {
-  console.log('markAsCover', index, task.value.attachments);
   task.value.attachments.forEach((attachment) => {
     attachment.isCover = false;
   });
-  console.log('task.attachments', task.value.attachments[index]);
   task.value.attachments[index].isCover = true;
 }
 </script>

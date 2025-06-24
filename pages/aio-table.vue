@@ -188,7 +188,6 @@ function resizeWrapper(isBoxed: boolean = true) {
 }
 
 function handleDelete() {
-  console.log('Selected accounts for deletion:', selected.value);
   if (selected.value.length) {
     selected.value.forEach(account => {
       deleteAccount(account);

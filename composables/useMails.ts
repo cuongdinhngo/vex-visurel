@@ -77,7 +77,6 @@ const mails = ref(
 export const useMails = () => {
 
   const getMailsViaCategory = (categoryId: string) => {
-    console.log('getMailsViaCategory', categoryId);
     return mails.value.filter(mail => mail.category.id === categoryId);
   }
 
