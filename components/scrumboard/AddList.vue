@@ -25,7 +25,7 @@
             class="rounded-pill"
             @click="addColumn(listName); listName = ''; addListMenu = false;"
           >
-            Add Column
+            Add Board Column
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -33,7 +33,7 @@
   </v-btn>
 </template>
 <script setup lang="ts">
-const { columns, addColumn } = useScrumboard();
+const { addColumn } = useScrumboard();
 
 const listName = ref('');
 const addListMenu = ref(false);

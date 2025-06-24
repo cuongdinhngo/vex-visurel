@@ -34,7 +34,8 @@
         v-for="(column, index) in columns"
         :key="index"
         :title="column.name"
-        :tasks="column.tasks"
+        :columnId="column.id"
+        v-model:tasks="column.tasks"
       />
       
       <!-- Add New List -->

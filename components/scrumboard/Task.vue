@@ -108,7 +108,7 @@
 
       <v-divider></v-divider>
 
-      <v-card-text>
+      <ItemsScrollCard>
         <!-- Description -->
         <ScrumboardModifyDescription
           v-model:task="task"
@@ -123,7 +123,7 @@
         <ScrumboardModifyComments
           v-model:task="task"
         />
-      </v-card-text>
+      </ItemsScrollCard>
     </v-card>
   </v-dialog>
 </template>
@@ -148,7 +148,7 @@ const coverImage = computed(() => {
 });
 
 const labels = computed(() => {
-  return task.value.labels.map(label => {
+  return task.value.labels?.map(label => {
     const labelData = LABELS.find(l => l.id === label);
     return labelData;
   });
