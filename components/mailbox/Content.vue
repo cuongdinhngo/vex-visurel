@@ -5,7 +5,7 @@
     class="pa-0 ma-0"
     width="auto"
   >
-    <v-card-title class="text-h6">{{ mail?.subject }}</v-card-title>
+    <v-card-title class="text-h6 text-wrap">{{ mail?.subject }}</v-card-title>
     <v-card-title class="">
       <v-list-item
         :prepend-avatar="mail?.sender.avatar"

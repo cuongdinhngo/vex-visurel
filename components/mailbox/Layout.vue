@@ -77,7 +77,7 @@
 
             <!-- Mail Content Details -->
             <v-col
-              cols="11"
+              cols="12"
               md="6"
               class="ma-0"
             >

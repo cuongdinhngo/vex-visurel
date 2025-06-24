@@ -32,3 +32,11 @@ a, .nuxt-link-active, .nuxt-link-exact-active {
   text-decoration: none;
   color: var(--v-theme-on-surface); // Uses Vuetify's default text color
 }
+
+.text-wrap {
+  word-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+  overflow-wrap: break-word;
+  max-width: 100%;
+}
