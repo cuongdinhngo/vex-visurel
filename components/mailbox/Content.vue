@@ -1,10 +1,12 @@
 <template>
+  <!--Mail Content-->
   <v-card
-    v-if="!mobile"
-    class="pa-4" elevation="0" tile width="50%"
+    elevation="0" tile
+    class="pa-0 ma-0"
+    width="auto"
   >
     <v-card-title class="text-h6">{{ mail?.subject }}</v-card-title>
-    <v-card-title>
+    <v-card-title class="">
       <v-list-item
         :prepend-avatar="mail?.sender.avatar"
         :title="mail?.sender.name"
@@ -66,7 +68,7 @@
         </v-list-item-title>
       </v-card>
     </v-expand-transition>
-    <v-card-text class="text-subtitle-1">
+    <v-card-text class="text-body-2">
       {{ mail?.body }}
     </v-card-text>
   </v-card>
@@ -91,6 +93,7 @@ const mail = ref(null);
 
 onMounted(() => {
   mail.value = getMailById(mailId.value);
+  console.log('Mail Content:', mail.value);
   if (mail.value) {
     markAsRead(mail.value.id);
   }

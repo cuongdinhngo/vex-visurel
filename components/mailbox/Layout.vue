@@ -3,7 +3,7 @@
     <v-layout>
       <!-- Navigation Drawer for Mail -->
       <MailboxNavDrawer
-        v-model="mailDrawer"
+        v-model:mailDrawer="mailDrawer"
       />
 
       <!-- Main content area -->
@@ -62,13 +62,28 @@
 
         <!-- Mail list and selected mail details -->
         <v-sheet :class="['d-flex', { 'mr-4': !mobile }]">
-          <!-- Mail List -->
-          <MailboxMailList
-            v-model:selectAll="selectAll"
-          />
+          <v-row>
+            <!-- Mail List -->
+             <v-col
+              v-if="isShowMailList"
+              cols="12"
+              md="6"
+              class="ma-0"
+            >
+              <MailboxMailList
+                v-model:selectAll="selectAll"
+              />
+            </v-col>
 
-          <!-- Mail Content Details -->
-          <slot />
+            <!-- Mail Content Details -->
+            <v-col
+              cols="11"
+              md="6"
+              class="ma-0"
+            >
+              <slot />
+            </v-col>
+          </v-row>
         </v-sheet>
       </v-main>
     </v-layout>
@@ -81,9 +96,20 @@ import { formatTimeAgo } from '@vueuse/core';
 const { mobile } = useDisplay();
 const { mails, getMailsViaCategory, getMailsViaLabel } = useMails();
 
+const mailId = useRouteParams('id', null);
 const selectAll = ref([]);
 const expandSenderInfo = ref(false);
-const mailDrawer = ref(true);
+const mailDrawer = ref(mobile.value ? false : true);
+const isShowMailList = ref(mobile.value && mailId.value ? true : false);
+
+watch(mailId, (newId) => {
+  console.log('Mail ID changed:', newId);
+  if (newId && mobile.value) {
+    isShowMailList.value = false;
+  } else {
+    isShowMailList.value = true;
+  }
+}, { immediate: true });
 
 </script>
 <style scoped>

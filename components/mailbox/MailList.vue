@@ -1,7 +1,7 @@
 <template>
   <v-card
     class="scrollbar border-e-thin elevation-0" elevation="0" flat tile
-    :width="mobile ? '100%' : '50%'">
+  >
     <div class="force-overflow">
       <v-hover
         v-for="mail in mailList"
@@ -37,7 +37,8 @@
                 :length="1"
                 active-color="orange-lighten-1"
                 size="md"
-                :model-value="mail.isStared"
+                clearable
+                :value="mail.rating"
               ></v-rating>
             </div>
             <div class="message-brief">

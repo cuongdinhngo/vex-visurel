@@ -46,13 +46,18 @@
           link
           density="compact"
           slim
+          @click.prevent="handleNavigation(item.to)"
         ></v-list-item>
       </v-list>
     </div>
   </v-navigation-drawer>
 </template>
 <script lang="ts" setup>
-const { mobile } = useDisplay();
+import { useRouter } from 'vue-router';
+import { nextTick } from 'vue';
+
+const router = useRouter();
+const { mobile, smAndUp } = useDisplay();
 
 const mailMenu = [
   {
@@ -79,6 +84,14 @@ const mailDrawer = defineModel('mailDrawer', {
   type: Boolean,
   default: false
 });
+
+function handleNavigation(to) {
+  if (mobile.value) {
+    mailDrawer.value = false;
+  }
+  router.push(to);
+}
+
 </script>
 <style scoped>
 .container-page {

@@ -1,11 +1,16 @@
 <template>
   <MailboxLayout>
-    <div class="mail-content d-flex justify-center">
+    <div
+      v-if="!mobile"
+      class="mail-content d-flex justify-center"
+    >
       <h3 class="read-message">Select a mail to read</h3>
     </div>
   </MailboxLayout>
 </template>
-
+<script setup lang="ts">
+const { mobile } = useDisplay();
+</script>
 <style scoped>
 .mail-content {
   background-image: url("/images/new_message.svg");
